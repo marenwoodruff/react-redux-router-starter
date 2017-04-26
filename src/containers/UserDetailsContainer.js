@@ -2,10 +2,14 @@ import { connect } from 'react-redux';
 
 import UserDetails from '../components/UserDetails';
 
-// "state.activeUser" is set in reducers/index.js
-const mapStateToProps = (state) => {
+const getUser = (users, userId) => {
+  return users.find(user => user.id === parseInt(userId, 10));
+}
+
+// http://redux.js.org/docs/advanced/UsageWithReactRouter.html
+const mapStateToProps = (state, ownProps) => {
   return {
-    user: state.activeUser
+    user: getUser(state.users, ownProps.match.params.userId)
   };
 }
 
